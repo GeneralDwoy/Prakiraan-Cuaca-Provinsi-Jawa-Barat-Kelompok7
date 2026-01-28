@@ -109,7 +109,7 @@ st.subheader("Statistik Kondisi Cuaca Provinsi Jawa Barat")
 warna_cuaca = {
     "Cerah": "#FF8C00",         
     "Cerah Berawan": "#FFD700",  
-    "Berawan": "#E0E0E0",       
+    "Berawan": "#808080",       
     "Hujan Ringan": "#1E90FF",  
     "Hujan Sedang": "#8A2BE2",  
     "Hujan Lebat": "#FF0000",    
