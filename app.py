@@ -7,6 +7,7 @@ import plotly.express as px
 #judul page
 st.set_page_config(
     page_title="Prakiraan Cuaca Provinsi Jawa Barat",
+    page_icon="awan.png",
     layout="wide"
 )
 
@@ -37,7 +38,7 @@ st.sidebar.markdown("Keterangan Warna Cuaca")
 st.sidebar.markdown("""
 - 🟠 Cerah  
 - 🟡 Cerah Berawan  
-- ⚪ Berawan  
+- 🔘 Berawan  
 - 🔵 Hujan Ringan  
 - 🟣 Hujan Sedang  
 - 🔴 Hujan Lebat  
@@ -57,21 +58,21 @@ if pilih_cuaca != "Semua Cuaca":
 def warna_marker(kondisi):
     kondisi = kondisi.lower()
     if "cerah" in kondisi and "berawan" not in kondisi:
-        return "orange"
+        return "#FF8C00"
     elif "cerah berawan" in kondisi:
-        return "lightorange"
-    elif "berawan" in kondisi :
-        return "gray"
-    elif "hujan ringan" in kondisi :
-        return "blue"
-    elif "hujan sedang" in kondisi :
-        return "purple"
-    elif "hujan lebat" in kondisi :
-        return "red"
-    elif "petir" in kondisi :
-        return "black"
+        return "#FFD700"
+    elif "berawan" in kondisi:
+        return "#808080"
+    elif "hujan ringan" in kondisi:
+        return "#1E90FF"
+    elif "hujan sedang" in kondisi:
+        return "#8A2BE2"
+    elif "hujan lebat" in kondisi:
+        return "#FF0000"
+    elif "hujan petir" in kondisi:
+        return "#000000"
     else:
-        return "lightgray"
+        return "#FFFFFF"
     
 # folium
 st.subheader("Peta Prakiraan Cuaca")
@@ -87,23 +88,21 @@ for _, row in df_filter.iterrows():
         popup=folium.Popup(
             f"""
             <b>{row['Kota']}</b><br>
-            <b>Kecamatan</b>: {row['Kecamatan']}<br>
-            <b>Kelurahan</b>: {row['Kelurahan']}<br><hr>
-            <b>Kondisi</b>: {row['Kondisi Cuaca']}<br>
-            <b>Suhu</b>: {row['Suhu (°C)']} °C<br>
-            <b>Kelembapan</b>: {row['Kelembapan (%)']} %<br>
-            <b>Angin</b>: {row['Kecepatan Angin (km/jam)']} km/jam<br>
-            <b>Waktu Prakiraan</b>: {row['Waktu Prakiraan']} <br>
-            <b>Latitude</b>: {row['Latitude']} <br>
-            <b>Longitude</b>: {row['Longitude']} 
+            <b>Kecamatan</b>       : {row['Kecamatan']}<br>
+            <b>Kelurahan</b>       : {row['Kelurahan']}<br><hr>
+            <b>Kondisi</b>         : {row['Kondisi Cuaca']}<br>
+            <b>Suhu</b>            : {row['Suhu (°C)']} °C<br>
+            <b>Kelembapan</b>      : {row['Kelembapan (%)']} %<br>
+            <b>Angin</b>           : {row['Kecepatan Angin (km/jam)']} km/jam<br>
+            <b>Waktu Prakiraan</b> : {row['Waktu Prakiraan']} <br>
+            <b>Latitude</b>        : {row['Latitude']} <br>
+            <b>Longitude</b>       : {row['Longitude']} 
             """,
             max_width=350 
         )
     ).add_to(map_jabar)
 
-st_folium(map_jabar, width=1200, height=500)
-
-
+st_folium(map_jabar, width='stretch', height=500)
 
 # grafik
 st.subheader("Statistik Kondisi Cuaca Provinsi Jawa Barat")
@@ -148,7 +147,7 @@ if not df_filter.empty:
         textposition="outside"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 else:
     st.info("Tidak ada data untuk ditampilkan.")
@@ -170,7 +169,7 @@ df_tabel.index = df_tabel.index + 1
 
 st.dataframe(
     df_tabel,
-    use_container_width=True
+    width='stretch'
 )
 
 st.caption(f"Total Data Di Tampilkan: {len(df_tabel)}")
