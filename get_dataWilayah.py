@@ -47,7 +47,7 @@ def ambil_dataWilayah_jabar():
 
         print("\nSelesai!")
         print("Total kelurahan/desa:", len(tabel))
-        print("File tersimpan: kode_wilayah_jabar.csv dan kode_wilayah_jabar.xlsx")
+        print("File tersimpan: kode_wilayah_jabar.csv")
 
     except Exception as error:
         print("Terjadi kesalahan:", error)
