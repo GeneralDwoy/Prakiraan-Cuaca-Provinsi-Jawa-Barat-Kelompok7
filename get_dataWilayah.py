@@ -43,7 +43,6 @@ def ambil_dataWilayah_jabar():
         # Simpan ke file CSV
         tabel = pd.DataFrame(data_kelurahan)
         tabel.to_csv("kode_wilayah_jabar.csv", index=False)
-        tabel.to_excel("kode_wilayah_jabar.xlsx", index=False)
 
         print("\nSelesai!")
         print("Total kelurahan/desa:", len(tabel))
